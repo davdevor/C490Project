@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EquationApp</string>
+    <string name="gross_ratio">Gross Ratio</string>
+    <string name="current_ratio">Current Ratio</string>
+    <string name="search">Search...</string>
+    <string name="searchButton">Search</string>
+    <string name="allButton">All Equations</string>
+    <string name="updateButton">Update Equations</string>
+    <string name="addButton">Add new equation</string>
+    <string name="addInputeEquation">Equation here</string>
+    <string name="addInputCourse">Course name</string>
+    <string name="addInputDescription">Description</string>
+    <string name="addInputName">Equation Name</string>
+    <string name="addTextFormat">PUTT IN ACTUAL TEXT</string>
+    <string name="addButtonAdd">Add</string>
+</resources>
