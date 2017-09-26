@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<EditText
+
+    android:id="@+id/updateInputName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:hint="@string/addInputName"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    android:layout_marginTop="19dp"
+    app:layout_constraintTop_toBottomOf="@+id/updateTextFormat"
+    app:layout_constraintHorizontal_bias="0.461"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp" />
+
+<EditText
+    android:id="@+id/updateInputDescription"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:hint="@string/addInputDescription"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    android:layout_marginTop="21dp"
+    app:layout_constraintTop_toBottomOf="@+id/updateInputName"
+    app:layout_constraintHorizontal_bias="0.461"
+    android:layout_marginLeft="8dp"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp" />
+
+<EditText
+    android:id="@+id/updateInputCourse"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:hint="@string/addInputCourse"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    android:layout_marginTop="19dp"
+    app:layout_constraintTop_toBottomOf="@+id/updateInputDescription"
+    app:layout_constraintHorizontal_bias="0.461"
+    android:layout_marginLeft="8dp"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp" />
+
+<EditText
+    android:id="@+id/updateInputEquation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:hint="@string/addInputeEquation"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    android:layout_marginTop="21dp"
+    app:layout_constraintTop_toBottomOf="@+id/updateInputCourse"
+    app:layout_constraintHorizontal_bias="0.461"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp" />
+
+<TextView
+    android:textAlignment="center"
+    android:id="@+id/updateTextFormat"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/addTextFormat"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    app:layout_constraintTop_toTopOf="@+id/guidelineupdate6"
+    android:layout_marginTop="21dp"
+    app:layout_constraintHorizontal_bias="0.0"
+    android:layout_marginLeft="8dp"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineupdate4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9557292"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="367dp" />
+
+<android.support.constraint.Guideline
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/guidelineupdate5"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.018229166"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="7dp" />
+
+<android.support.constraint.Guideline
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/guidelineupdate6"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.05"
+    tools:layout_editor_absoluteY="26dp"
+    tools:layout_editor_absoluteX="0dp" />
+
+<Button
+    android:id="@+id/updateButtonUpdate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/updateButtonUpdate"
+    app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
+    android:layout_marginTop="19dp"
+    app:layout_constraintTop_toBottomOf="@+id/updateInputEquation"
+    android:onClick="update"
+    app:layout_constraintHorizontal_bias="0.479"
+    android:layout_marginLeft="8dp"
+    app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
+    android:layout_marginRight="8dp" />
+</android.support.constraint.ConstraintLayout>
