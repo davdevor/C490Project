@@ -14,7 +14,7 @@
         android:inputType="textPersonName"
         android:hint="@string/addInputName"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline5"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/addTextFormat" />
 
@@ -26,7 +26,7 @@
         android:inputType="textPersonName"
         android:hint="@string/addInputDescription"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline5"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/addInputName" />
 
@@ -38,7 +38,7 @@
         android:inputType="textPersonName"
         android:hint="@string/addInputCourse"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline5"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/addInputDescription" />
 
@@ -50,7 +50,7 @@
         android:inputType="textPersonName"
         android:hint="@string/addInputeEquation"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline5"
+        app:layout_constraintLeft_toLeftOf="@+id/guidelineupdate5"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/addInputCourse" />
 
@@ -61,7 +61,7 @@
         android:text="@string/addTextFormat"
         android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="@+id/addInputName"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineupdate6"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="@+id/addInputName"
@@ -77,14 +77,14 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline5"
+        android:id="@+id/guidelineupdate5"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.018229166" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline6"
+        android:id="@+id/guidelineupdate6"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 

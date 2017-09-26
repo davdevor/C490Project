@@ -13,4 +13,6 @@
     <string name="addInputName">Equation Name</string>
     <string name="addTextFormat">PUTT IN ACTUAL TEXT</string>
     <string name="addButtonAdd">Add</string>
+    <string name="allButtonUpdate">update</string>
+    <string name="updateButtonUpdate">Update</string>
 </resources>

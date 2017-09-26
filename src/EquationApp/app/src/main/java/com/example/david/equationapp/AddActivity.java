@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.david.equationapp.models.DatabaseMangaer;
+import com.example.david.equationapp.models.DatabaseManager;
 import com.example.david.equationapp.models.MyEquation;
 
 /**
@@ -28,8 +28,8 @@ public class AddActivity extends AppCompatActivity {
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());
-        DatabaseMangaer db = new DatabaseMangaer();
-        String temp = db.insert(equ);
-        Toast.makeText(this,temp,Toast.LENGTH_LONG).show();
+        DatabaseManager db = new DatabaseManager(this);
+        db.insert(equ);
+        Toast.makeText(this,"added",Toast.LENGTH_LONG).show();
     }
 }
