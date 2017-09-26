@@ -5,12 +5,14 @@ package com.example.david.equationapp.models;
  */
 
 public class MyEquation {
+    private int id;
     private String name;
     private String description;
     private String course;
     private String equation;
 
-    public MyEquation(String name, String description, String course, String equation){
+    public MyEquation(int id,String name, String description, String course, String equation){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.course = course;
@@ -28,5 +30,8 @@ public class MyEquation {
     }
     public String getEquation(){
         return equation;
+    }
+    public int getId(){
+        return id;
     }
 }

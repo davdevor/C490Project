@@ -57,13 +57,28 @@ public class DatabaseManager extends SQLiteOpenHelper{
 
         HashMap<String,MyEquation> equations = new HashMap<>();
         while(cursor.moveToNext()){
-            MyEquation currentEquation = new MyEquation(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+            MyEquation currentEquation = new MyEquation(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
             equations.put(currentEquation.getName(),currentEquation);
         }
         return equations;
     }
-    public void updateByName(MyEquation equation){
+    public void updateById(MyEquation equation){
 
+        StringBuilder sqlUpdate = new StringBuilder("update " + TABEL_EQUATIONS);
+        sqlUpdate.append(" set " + NAME + " = '" + equation.getName() + "', ");
+        sqlUpdate.append(DESCRIPTION + " = " + "'" + equation.getDescription() + "', ");
+        sqlUpdate.append(COURSE + " = " + "'" + equation.getCourse() + "', ");
+        sqlUpdate.append(EQUATION + " = " + "'" + equation.getEquation() + "' ");
+        sqlUpdate.append("where " + ID + " = " + equation.getId());
+
+        dbWriteable.execSQL(sqlUpdate.toString());
+    }
+    public void deleteById(int id){
+        StringBuilder sqlUpdate = new StringBuilder("delete from ");
+        sqlUpdate.append(TABEL_EQUATIONS + " ");
+        sqlUpdate.append("where " + ID + " = " +id);
+
+        dbWriteable.execSQL(sqlUpdate.toString());
     }
     public void onDestroy(){
         dbWriteable.close();
