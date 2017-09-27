@@ -2,7 +2,6 @@ package com.example.david.equationapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +9,8 @@ import android.widget.LinearLayout;
 
 import com.example.david.equationapp.models.DatabaseManager;
 import com.example.david.equationapp.models.MyEquation;
+import com.example.david.equationapp.models.PostfixCalculator;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,6 +24,7 @@ public class UpdateActivity extends AppCompatActivity {
     private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
     private String currentEquation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,6 @@ public class UpdateActivity extends AppCompatActivity {
         for (int i = 0, j = equations.size(); i < j; i++) {
             button = new Button(this);
             String name = it.next().getName();
-            Log.w("Hello ", name );
             button.setText(name);
             button.setOnClickListener(bh);
             ll.addView(button);
@@ -75,7 +74,6 @@ public class UpdateActivity extends AppCompatActivity {
             EditText courseET = (EditText) findViewById(R.id.updateInputCourse);
             EditText equationET = (EditText) findViewById(R.id.updateInputEquation);
             Button button = (Button) v;
-            Log.w("Hello",button.getText().toString() );
             currentEquation = button.getText().toString();
             MyEquation e = equations.get(currentEquation);
             nameET.setText(e.getName());

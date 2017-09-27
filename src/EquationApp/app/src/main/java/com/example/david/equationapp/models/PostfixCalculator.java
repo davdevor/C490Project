@@ -18,7 +18,7 @@ public class PostfixCalculator {
 
     }
 
-    public int operatorToPrecedence(String op){
+    private int operatorToPrecedence(String op){
         if( op.equals("+"))
             return PostfixCalculator.PRECEDENCE_PLUS ;
         else if( op.equals("-"))
@@ -33,7 +33,7 @@ public class PostfixCalculator {
             return PostfixCalculator.PRECEDENCE_PARANTHESIS;
     }
 
-    public boolean isOperand(String s, boolean allowParanethesis){
+    private boolean isOperand(String s, boolean allowParanethesis){
         s = s.trim();
         if (s.length() != 1 )
             return false;
@@ -42,7 +42,7 @@ public class PostfixCalculator {
         else return 	operands.indexOf( s ) != -1 ;
     }
 
-    public boolean isNumber(String s){
+    private boolean isNumber(String s){
         String  master="-0123456789.";
         s = s.trim();
 
@@ -64,17 +64,18 @@ public class PostfixCalculator {
         boolean  bAllowParenthesis = false;
         for( String token : tokens)
         {
-            if(token.equals("-")==false && isNumber(token ))
+            if(!token.equals("-") && isNumber(token ))
             {
                 double d = Double.parseDouble( token  ) ;
-                numberStack.push(d ) ;
+                numberStack.push(d) ;
             }
             else if( isOperand( token , bAllowParenthesis   ) )
             {
                 if( numberStack.size() <  2 )
                 {
-                    System.out.println("Invalid Syntax, operator " + token + " must be preceeded by at least two operands");
-                    return;
+
+                        System.out.println("Invalid Syntax, operator " + token + " must be preceeded by at least two operands");
+                        return;
                 }
                 double num1 = numberStack.pop();
                 double num2 = numberStack.pop() ;
@@ -117,44 +118,57 @@ public class PostfixCalculator {
 
         ArrayList<String> output  = new ArrayList<String>();
         input = input.replaceAll("\\s+","") ;
-
+        System.out.println("with no white space " + input); //REMOVE
         Stack<String> operandStack = new Stack<String>();
         for(int i = 0 ;i< input.length() ; i++)
         {
             String currentToken = input.substring(i,i+1);
-            if( isOperand(currentToken, true))
-            {
-                //this.p("I currentToken : " + currentToken + " , operands : " + operands +",output: "+ output.toString().replaceAll(",", " " ) );
-                if( operandStack.size() == 0)
-                    operandStack.push( currentToken );
-                else if(operandStack.size() > 0  && currentToken.equals(")" ) )
-                {
-                    //this.p("I, currentToken " +currentToken+ ",  operands : " + operands  );
-                    while( operandStack.size() > 0  && operandStack.peek().equals("(" ) == false)
+            if( isOperand(currentToken, true)) {
+                //this if is for negative numbers
+                if (currentToken.equals("-")&&isOperand(Character.toString(input.charAt(i - 1)), true)) {
+                    numberLoop : while(  i+1 < input.length())
                     {
-                        output.add( operandStack.pop() ) ;
-                    }
-                    ///if(operands.size() > 0) this.p("II now get rid of closing paran : " + operands.peek() );
-                    operandStack.pop(); // remove "(" that matches opening parenthesis
-                }
-                else if(operandStack.size() > 0 )
-                {
-                    if( (currentToken.equals("(") && operandStack.peek().equals("(") ) || (currentToken.equals("(")== false &&  this.operatorToPrecedence( operandStack.peek() ) >= this.operatorToPrecedence(currentToken) ) )
-                    {
-                        while (operandStack.size()> 0 && operandStack.peek().equals("(")== false &&  this.operatorToPrecedence( operandStack.peek() ) >= this.operatorToPrecedence(currentToken))
+                        String nxtLttr =  input.substring(i+1,i+2);
+                        if(nxtLttr.equals("-") ) //then it's a subtraction sign not a unary negative sign
+                            break numberLoop;
+                        if( isNumber(nxtLttr ) )
                         {
-                            //this.p("III pop off " + operands.peek() +", greater than " + currentToken +",current  out: "+ output.toString().replaceAll(",", " " ) );
-                            output.add(operandStack.pop() );
+                            currentToken +=nxtLttr;
+                            i++;
                         }
-                        operandStack.push( currentToken ) ;
+                        else
+                            break numberLoop;
                     }
-                    else if( this.operatorToPrecedence( operandStack.peek() ) < this.operatorToPrecedence(currentToken) )
-                    {
-                        operandStack.push( currentToken ) ;
+                    try{//in case it is only dots and or negative signs
+                        output.add(currentToken) ;
+                    }
+                    catch (NumberFormatException e){  System.out.println(currentToken + " is not a valid number"); }
+                }
+                else {
+                    //this.p("I currentToken : " + currentToken + " , operands : " + operands +",output: "+ output.toString().replaceAll(",", " " ) );
+                    if (operandStack.size() == 0)
+                        operandStack.push(currentToken);
+                    else if (operandStack.size() > 0 && currentToken.equals(")")) {
+                        //this.p("I, currentToken " +currentToken+ ",  operands : " + operands  );
+                        while (operandStack.size() > 0 && operandStack.peek().equals("(") == false) {
+                            output.add(operandStack.pop());
+                        }
+                        ///if(operands.size() > 0) this.p("II now get rid of closing paran : " + operands.peek() );
+                        operandStack.pop(); // remove "(" that matches opening parenthesis
+                    } else if (operandStack.size() > 0) {
+                        if ((currentToken.equals("(") && operandStack.peek().equals("(")) || (currentToken.equals("(") == false && this.operatorToPrecedence(operandStack.peek()) >= this.operatorToPrecedence(currentToken))) {
+                            while (operandStack.size() > 0 && operandStack.peek().equals("(") == false && this.operatorToPrecedence(operandStack.peek()) >= this.operatorToPrecedence(currentToken)) {
+                                //this.p("III pop off " + operands.peek() +", greater than " + currentToken +",current  out: "+ output.toString().replaceAll(",", " " ) );
+                                output.add(operandStack.pop());
+                            }
+                            operandStack.push(currentToken);
+                        } else if (this.operatorToPrecedence(operandStack.peek()) < this.operatorToPrecedence(currentToken)) {
+                            operandStack.push(currentToken);
+                        }
                     }
                 }
             }
-            else if (    isNumber( currentToken ) )
+            else if(isNumber( currentToken ))
             {
                 // need a while loop to keep concatenating all numbers into one string that we end at end of while loop
                 numberLoop : while(  i+1 < input.length())
@@ -192,11 +206,15 @@ public class PostfixCalculator {
         boolean debug = false;
         PostfixCalculator rp = new PostfixCalculator();
         ArrayList<String> asPostfix ;
-        String parseMe =" (((3 - 5)*(2)) + 6) ";
+        String parseMe =" -(-5 + -3) ";
 
         String answer = "3 5 - ^ 2 6 + ";
         System.out.println("parseMe " +parseMe) ;
         asPostfix =  rp.infixToPostfix(parseMe);
+        for (String x:asPostfix) {
+            System.out.print(x);
+        }
+        System.out.println();
         String asPostfix_str = asPostfix.toString().replaceAll(",", " " ) ;
         asPostfix_str = asPostfix_str.substring(1, asPostfix_str.length()-1 ) ;
 
