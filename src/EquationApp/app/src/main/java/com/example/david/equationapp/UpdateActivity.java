@@ -24,6 +24,7 @@ public class UpdateActivity extends AppCompatActivity {
     private DatabaseManager db;
     private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
+    private String currentEquation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +54,16 @@ public class UpdateActivity extends AppCompatActivity {
         EditText descriptionET = (EditText) findViewById(R.id.updateInputDescription);
         EditText courseET = (EditText) findViewById(R.id.updateInputCourse);
         EditText equationET = (EditText) findViewById(R.id.updateInputEquation);
-        MyEquation equ = new MyEquation(nameET.getText().toString(),
+        MyEquation equ = new MyEquation(equations.get(currentEquation).getId(),nameET.getText().toString(),
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());
-        db.updateByName(equ);
+        db.updateById(equ);
        createView();
+    }
+    public void delete(View v){
+        db.deleteById(equations.get(currentEquation).getId());
+        createView();
     }
 
     private class ButtonHandler implements View.OnClickListener {
@@ -71,7 +76,8 @@ public class UpdateActivity extends AppCompatActivity {
             EditText equationET = (EditText) findViewById(R.id.updateInputEquation);
             Button button = (Button) v;
             Log.w("Hello",button.getText().toString() );
-            MyEquation e = equations.get(button.getText().toString());
+            currentEquation = button.getText().toString();
+            MyEquation e = equations.get(currentEquation);
             nameET.setText(e.getName());
             descriptionET.setText(e.getDescription());
             courseET.setText(e.getCourse());

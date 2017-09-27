@@ -24,7 +24,7 @@ public class AddActivity extends AppCompatActivity {
         EditText descriptionET = (EditText) findViewById(R.id.addInputDescription);
         EditText courseET = (EditText) findViewById(R.id.addInputCourse);
         EditText equationET = (EditText) findViewById(R.id.addInputEquation);
-        MyEquation equ = new MyEquation(nameET.getText().toString(),
+        MyEquation equ = new MyEquation(0,nameET.getText().toString(),
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());

@@ -3,11 +3,9 @@ package com.example.david.equationapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 
-import com.example.david.equationapp.models.DatabaseManager;
+
 
 public class MainActivity extends AppCompatActivity {
     @Override
