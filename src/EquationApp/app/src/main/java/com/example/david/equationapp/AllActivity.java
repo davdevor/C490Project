@@ -27,7 +27,7 @@ public class AllActivity extends AppCompatActivity {
     private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
     private MyEquation currentEquation;
-    private PostfixCalculator calc = new PostfixCalculator();
+    //private PostfixCalculator calc = new PostfixCalculator();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,23 @@ public class AllActivity extends AppCompatActivity {
     public void compute(View v){
         TextView answerTV = (TextView) findViewById(R.id.viewequationAnswer);
         EditText valuesET = (EditText) findViewById(R.id.viewequationInput);
+        String valuesString = valuesET.getText().toString();
+        valuesString = valuesString.replaceAll("\\s","");;
+        valuesString+=",";
+        ArrayList<String> varValue = new ArrayList<>();
+        StringBuilder temp = new StringBuilder();
+        for(int i = 0, k = valuesString.length(); i < k;i++){
+
+            char digit = valuesString.charAt(i);
+            while (digit!=','&& i < k){
+                temp.append(digit);
+                digit = valuesString.charAt(++i);
+            }
+            varValue.add(temp.toString());
+            temp = new StringBuilder();
+        }
+        PostfixCalculator calc = new PostfixCalculator(currentEquation.getEquation(),varValue);
+        answerTV.setText(Double.toString(calc.getResult()));
     }
 
     private class ButtonHandler implements View.OnClickListener {
