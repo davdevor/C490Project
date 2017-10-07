@@ -16,4 +16,6 @@
     <string name="allButtonUpdate">update</string>
     <string name="updateButtonUpdate">Update</string>
     <string name="updateButtonDelete">Delete</string>
+    <string name="viewequationButtonCompute">Compute</string>
+    <string name="viewequationInputValues">Input values</string>
 </resources>
