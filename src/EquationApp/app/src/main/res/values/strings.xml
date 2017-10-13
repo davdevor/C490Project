@@ -18,4 +18,5 @@
     <string name="updateButtonDelete">Delete</string>
     <string name="viewequationButtonCompute">Compute</string>
     <string name="viewequationInputValues">Input values</string>
+    <string name="signout">Sign out</string>
 </resources>
