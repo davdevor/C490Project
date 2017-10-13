@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "79292726410",
+    "firebase_url": "https://c490project.firebaseio.com",
+    "project_id": "c490project",
+    "storage_bucket": "c490project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79292726410:android:7fe7e887371290a5",
+        "android_client_info": {
+          "package_name": "com.example.david.equationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79292726410-vmuequ612ktnc67al85qrjp60tvvrqsi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.david.equationapp",
+            "certificate_hash": "f6e74950b032e2f2dd75402bf4efda37e7e1eab4"
+          }
+        },
+        {
+          "client_id": "79292726410-5jdaavdo9g2ovj7727ckdnoqej5usbiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPoe2fK4KiWcJGlWL-nPn0bu-LhCv4ciU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79292726410-5jdaavdo9g2ovj7727ckdnoqej5usbiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
