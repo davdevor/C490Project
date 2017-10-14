@@ -2,20 +2,30 @@ package com.example.david.equationapp;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import  com.google.firebase.auth.*;
 import android.view.MenuItem;
+import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
+
+import static android.R.attr.duration;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +61,48 @@ public class MainActivity extends AppCompatActivity {
                             .build(),RC_SIGN_IN);
         }
     }
+    /* Doens't work properly need to find the view the sign is on
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        ;
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
 
+            // Successfully signed in
+            if (resultCode == RESULT_OK) {
+                //may be inccorect TO DO
+                startActivity(new Intent(new Intent(MainActivity.this, MainActivity.class)));
+                finish();
+                return;
+            } else {
+                // Sign in failed
+                if (response == null) {
+                    // User pressed back button
+                    Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.sign_in_cancelled, Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Snackbar mySnackbar = Snackbar.make(viewGroup.getChildAt(0), R.string.no_internet_connection, Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.unknown_error, Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                    return;
+                }
+            }
+            Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.unknown_sign_in_response, Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+    }
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -68,6 +119,39 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 return true;
+            }
+            case R.id.app_bar_delete_account:{
+                final MainActivity temp = this;
+                new AlertDialog.Builder(this)
+                        .setTitle("")
+                        .setMessage("Do you really want to delete your account?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                AuthUI.getInstance()
+                                        .delete(temp)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Deletion succeeded
+                                                    Toast.makeText(MainActivity.this, R.string.deleted, Toast.LENGTH_SHORT).show();
+                                                    AuthUI.getInstance().signOut(temp).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            startActivity(new Intent(new Intent(MainActivity.this, MainActivity.class)));
+                                                            finish();
+                                                        }
+                                                    });
+                                                } else {
+                                                    // Deletion failed
+                                                    Toast.makeText(MainActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
             default:
                 return super.onOptionsItemSelected(item);
