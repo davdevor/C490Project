@@ -1,4 +1,4 @@
-#My andriod app Project
+# My andriod app Project
 
 ## Features
-This is is going to let you store equations the user has entered as strings. It will let the user enter in data to solve the equations.
+This app is going to let the user store equations as strings. It will then let the user come back to those equations saved and enter in data for the app to solve the equations.
