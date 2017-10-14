@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
+                        return true;
             }
             default:
                 return super.onOptionsItemSelected(item);
