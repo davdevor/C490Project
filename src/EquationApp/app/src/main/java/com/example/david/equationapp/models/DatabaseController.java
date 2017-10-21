@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -21,11 +22,11 @@ import java.util.HashMap;
 public class DatabaseController implements IDatabase {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private ArrayList<MyEquation> list;
+    private HashMap<String,MyEquation> list;
 
     public DatabaseController(){
         mDatabase.child("equations").child(mAuth.getUid()).addValueEventListener(new DatabaseChange());
-        list = new ArrayList<MyEquation>();
+        list = new HashMap<String,MyEquation>();
     }
     @Override
     public void insert(MyEquation e){
@@ -43,17 +44,17 @@ public class DatabaseController implements IDatabase {
     }
 
     @Override
-    public Collection<MyEquation> selectAll() {
+    public HashMap<String,MyEquation> selectAll() {
         return list;
     }
     private class DatabaseChange implements ValueEventListener {
         String userID = mAuth.getUid();
 
         public void onDataChange(DataSnapshot dataSnapshot) {
-            list = new ArrayList<MyEquation>();
+            list = new HashMap<String, MyEquation>();
             for (DataSnapshot equationDataSnapshot : dataSnapshot.getChildren()) {
                 MyEquation equation = equationDataSnapshot.getValue(MyEquation.class);
-                list.add(equation);
+                list.put(equation.getName(),equation);
             }
         }
         @Override

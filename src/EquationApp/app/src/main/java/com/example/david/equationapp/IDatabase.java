@@ -2,6 +2,7 @@ package com.example.david.equationapp;
 
 import com.example.david.equationapp.models.MyEquation;
 
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -14,5 +15,5 @@ public interface IDatabase {
     public void insert(MyEquation e);
     public void updateById(MyEquation e);
     public void deleteById(int id);
-    public Collection<MyEquation> selectAll();
+    public AbstractMap<String,MyEquation> selectAll();
 }

@@ -9,6 +9,7 @@ import com.example.david.equationapp.models.*;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by David on 9/25/2017.
@@ -30,14 +31,10 @@ public class AddActivity extends AppCompatActivity {
         EditText equationET = (EditText) findViewById(R.id.addInputEquation);
 
         String equationName = nameET.getText().toString();
-        ArrayList<MyEquation> temp = (ArrayList<MyEquation>)db.selectAll();
-        int i = 0;
-        int size = temp.size();
-        while(i<size&&!temp.get(i).getName().equals(equationName)){
-            i++;
-        }
-        if(i==size){
-        MyEquation equ = new MyEquation(nameET.getText().toString(),
+        HashMap<String,MyEquation> temp = (HashMap<String,MyEquation>)db.selectAll();
+
+        if(!temp.containsKey(equationName)){
+        MyEquation equ = new MyEquation(equationName,
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());

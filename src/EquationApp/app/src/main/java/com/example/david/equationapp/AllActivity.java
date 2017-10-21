@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.LinearLayout;
 import com.example.david.equationapp.models.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
@@ -17,23 +20,26 @@ import java.util.ArrayList;
 
 public class AllActivity extends AppCompatActivity {
     private IDatabase db = MainActivity.getDB();
-    private ArrayList<MyEquation> equations;
+    private Collection<MyEquation> equationList;
+    private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
     private MyEquation currentEquation;
     //private PostfixCalculator calc = new PostfixCalculator();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        equations = (HashMap<String,MyEquation>)db.selectAll();
         createView();
     }
     public void createView(){
         ll = new LinearLayout(this);
-        equations = (ArrayList<MyEquation>)db.selectAll();
+        equationList = equations.values();
         Button button;
         ButtonHandler bh = new ButtonHandler();
-        for (int i = 0, j = equations.size(); i < j; i++) {
+        Iterator<MyEquation> it = equationList.iterator();
+        for (int i = 0, j = equationList.size(); i < j; i++) {
             button = new Button(this);
-            String name = equations.get(i).getName();
+            String name = it.next().getName();
             button.setText(name);
             button.setAllCaps(false);
             button.setOnClickListener(bh);
@@ -73,11 +79,7 @@ public class AllActivity extends AppCompatActivity {
             TextView courseTV = (TextView) findViewById(R.id.viewequationCourse);
             TextView equationTV = (TextView) findViewById(R.id.viewequationEquation);
             Button button = (Button) v;
-            int i =0;
-            while(!equations.get(i).getName().equals(button.getText().toString())){
-                i++;
-            }
-            currentEquation = equations.get(i);
+            currentEquation = equations.get(button.getText().toString());
             nameTV.setText(currentEquation.getName());
             descriptionTV.setText(currentEquation.getDescription());
             courseTV.setText(currentEquation.getCourse());
