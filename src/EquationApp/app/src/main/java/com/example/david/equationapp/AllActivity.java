@@ -2,48 +2,38 @@ package com.example.david.equationapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.LinearLayout;
-
-import com.example.david.equationapp.models.DatabaseManager;
-import com.example.david.equationapp.models.MyEquation;
-import com.example.david.equationapp.models.PostfixCalculator;
-
+import com.example.david.equationapp.models.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
+
 
 /**
  * Created by David on 9/25/2017.
  */
 
 public class AllActivity extends AppCompatActivity {
-    private DatabaseManager db;
-    private HashMap<String,MyEquation> equations;
+    private IDatabase db = MainActivity.getDB();
+    private ArrayList<MyEquation> equations;
     private LinearLayout ll;
     private MyEquation currentEquation;
     //private PostfixCalculator calc = new PostfixCalculator();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new DatabaseManager(this);
         createView();
     }
     public void createView(){
         ll = new LinearLayout(this);
-        equations = db.selectAll();
+        equations = (ArrayList<MyEquation>)db.selectAll();
         Button button;
         ButtonHandler bh = new ButtonHandler();
-        Collection<MyEquation> temp = equations.values();
-        Iterator<MyEquation> it = temp.iterator();
         for (int i = 0, j = equations.size(); i < j; i++) {
             button = new Button(this);
-            String name = it.next().getName();
+            String name = equations.get(i).getName();
             button.setText(name);
             button.setOnClickListener(bh);
             ll.addView(button);
@@ -82,7 +72,11 @@ public class AllActivity extends AppCompatActivity {
             TextView courseTV = (TextView) findViewById(R.id.viewequationCourse);
             TextView equationTV = (TextView) findViewById(R.id.viewequationEquation);
             Button button = (Button) v;
-            currentEquation = equations.get(button.getText().toString());
+            int i =0;
+            while(!equations.get(i).getName().equals(button.getText().toString())){
+                i++;
+            }
+            currentEquation = equations.get(i);
             nameTV.setText(currentEquation.getName());
             descriptionTV.setText(currentEquation.getDescription());
             courseTV.setText(currentEquation.getCourse());

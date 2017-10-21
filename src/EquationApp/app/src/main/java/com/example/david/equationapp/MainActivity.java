@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+
+import com.example.david.equationapp.models.DatabaseController;
 import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -22,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.Arrays;
 
@@ -31,10 +34,12 @@ import static android.R.attr.duration;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 123;
+    private  static DatabaseController db = new DatabaseController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 
     }
     @Override
@@ -184,5 +189,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+    public static DatabaseController getDB(){
+        return db;
     }
 }

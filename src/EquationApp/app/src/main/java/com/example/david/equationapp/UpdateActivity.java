@@ -53,12 +53,12 @@ public class UpdateActivity extends AppCompatActivity {
         EditText descriptionET = (EditText) findViewById(R.id.updateInputDescription);
         EditText courseET = (EditText) findViewById(R.id.updateInputCourse);
         EditText equationET = (EditText) findViewById(R.id.updateInputEquation);
-        MyEquation equ = new MyEquation(equations.get(currentEquation).getId(),nameET.getText().toString(),
+      /*  MyEquation equ = new MyEquation(equations.get(currentEquation).getId(),nameET.getText().toString(),
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());
         db.updateById(equ);
-       createView();
+       createView();*/
     }
     public void delete(View v){
         db.deleteById(equations.get(currentEquation).getId());

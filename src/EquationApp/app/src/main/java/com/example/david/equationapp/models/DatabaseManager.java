@@ -57,8 +57,8 @@ public class DatabaseManager extends SQLiteOpenHelper{
 
         HashMap<String,MyEquation> equations = new HashMap<>();
         while(cursor.moveToNext()){
-            MyEquation currentEquation = new MyEquation(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
-            equations.put(currentEquation.getName(),currentEquation);
+           // MyEquation currentEquation = new MyEquation(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+            //equations.put(currentEquation.getName(),currentEquation);
         }
         return equations;
     }
