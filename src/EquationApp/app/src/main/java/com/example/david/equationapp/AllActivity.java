@@ -35,6 +35,7 @@ public class AllActivity extends AppCompatActivity {
             button = new Button(this);
             String name = equations.get(i).getName();
             button.setText(name);
+            button.setAllCaps(false);
             button.setOnClickListener(bh);
             ll.addView(button);
         }
