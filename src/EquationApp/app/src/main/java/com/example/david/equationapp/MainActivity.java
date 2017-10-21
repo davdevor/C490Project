@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

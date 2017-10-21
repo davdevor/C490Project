@@ -69,7 +69,7 @@ public class DatabaseManager extends SQLiteOpenHelper{
         sqlUpdate.append(DESCRIPTION + " = " + "'" + equation.getDescription() + "', ");
         sqlUpdate.append(COURSE + " = " + "'" + equation.getCourse() + "', ");
         sqlUpdate.append(EQUATION + " = " + "'" + equation.getEquation() + "' ");
-        sqlUpdate.append("where " + ID + " = " + equation.getId());
+       // sqlUpdate.append("where " + ID + " = " + equation.getId());
 
         dbWriteable.execSQL(sqlUpdate.toString());
     }

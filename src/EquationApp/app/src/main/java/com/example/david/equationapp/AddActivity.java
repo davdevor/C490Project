@@ -28,14 +28,25 @@ public class AddActivity extends AppCompatActivity {
         EditText descriptionET = (EditText) findViewById(R.id.addInputDescription);
         EditText courseET = (EditText) findViewById(R.id.addInputCourse);
         EditText equationET = (EditText) findViewById(R.id.addInputEquation);
-        
+
+        String equationName = nameET.getText().toString();
         ArrayList<MyEquation> temp = (ArrayList<MyEquation>)db.selectAll();
-        MyEquation equ = new MyEquation(mAuth.getUid(),nameET.getText().toString(),
+        int i = 0;
+        int size = temp.size();
+        while(i<size&&!temp.get(i).getName().equals(equationName)){
+            i++;
+        }
+        if(i==size){
+        MyEquation equ = new MyEquation(nameET.getText().toString(),
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());
 
         db.insert(equ);
-        Toast.makeText(this,"added",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,R.string.equationAdded,Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this,R.string.equationExists,Toast.LENGTH_LONG).show();
+        }
     }
 }

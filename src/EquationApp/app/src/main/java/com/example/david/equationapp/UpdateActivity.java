@@ -61,7 +61,7 @@ public class UpdateActivity extends AppCompatActivity {
        createView();*/
     }
     public void delete(View v){
-        db.deleteById(equations.get(currentEquation).getId());
+       // db.deleteById(equations.get(currentEquation).getId());
         createView();
     }
 
