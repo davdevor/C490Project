@@ -13,7 +13,7 @@ import java.util.HashMap;
 public interface IDatabase {
 
     public void insert(MyEquation e);
-    public void updateById(MyEquation e);
-    public void deleteById(int id);
+    public void updateByName(MyEquation e);
+    public void deleteByName(MyEquation e);
     public AbstractMap<String,MyEquation> selectAll();
 }

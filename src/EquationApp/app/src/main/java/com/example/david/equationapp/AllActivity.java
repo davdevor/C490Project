@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import com.example.david.equationapp.models.*;
@@ -24,6 +25,7 @@ public class AllActivity extends AppCompatActivity {
     private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
     private MyEquation currentEquation;
+    private ScrollView sv;
     //private PostfixCalculator calc = new PostfixCalculator();
 
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,10 @@ public class AllActivity extends AppCompatActivity {
         createView();
     }
     public void createView(){
+        sv = new ScrollView(this);
         ll = new LinearLayout(this);
+        sv.addView(ll);
+        ll.setOrientation(LinearLayout.VERTICAL);
         equationList = equations.values();
         Button button;
         ButtonHandler bh = new ButtonHandler();
@@ -45,7 +50,7 @@ public class AllActivity extends AppCompatActivity {
             button.setOnClickListener(bh);
             ll.addView(button);
         }
-        setContentView(ll);
+        setContentView(sv);
     }
 
     public void compute(View v){
