@@ -10,14 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.example.david.equationapp.models.DatabaseController;
-import com.example.david.equationapp.models.DatabaseManager;
 import com.example.david.equationapp.models.MyEquation;
-import com.example.david.equationapp.models.PostfixCalculator;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by David on 9/25/2017.

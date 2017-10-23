@@ -28,4 +28,5 @@
     <string name="failed">Failed</string>
     <string name="equationExists">Equation name already exists</string>
     <string name="equationAdded">Added</string>
+    <string name="equationNameEmpty">Please enter a equation name</string>
 </resources>

@@ -34,13 +34,18 @@ public class AddActivity extends AppCompatActivity {
         HashMap<String,MyEquation> temp = (HashMap<String,MyEquation>)db.selectAll();
 
         if(!temp.containsKey(equationName)){
-        MyEquation equ = new MyEquation(equationName,
+            if(!equationName.equals("")){
+                MyEquation equ = new MyEquation(equationName,
                 descriptionET.getText().toString(),
                 courseET.getText().toString(),
                 equationET.getText().toString());
+                db.insert(equ);
+                Toast.makeText(this,R.string.equationAdded,Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this,R.string.equationNameEmpty,Toast.LENGTH_LONG).show();
+            }
 
-        db.insert(equ);
-        Toast.makeText(this,R.string.equationAdded,Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(this,R.string.equationExists,Toast.LENGTH_LONG).show();
