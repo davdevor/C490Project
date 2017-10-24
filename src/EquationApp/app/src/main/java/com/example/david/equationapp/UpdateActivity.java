@@ -66,7 +66,7 @@ public class UpdateActivity extends AppCompatActivity {
     }
     public void delete(View v){
         db.deleteByName(equations.get(currentEquation));
-        //remove this and then on change works
+        equations.remove(currentEquation);
         createView();
 
     }
