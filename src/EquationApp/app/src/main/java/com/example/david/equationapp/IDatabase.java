@@ -12,8 +12,8 @@ import java.util.HashMap;
 
 public interface IDatabase {
 
-    public void insert(MyEquation e);
-    public void updateByName(MyEquation e);
-    public void deleteByName(MyEquation e);
+    public boolean insert(MyEquation e);
+    public boolean updateByName(MyEquation e);
+    public boolean deleteByName(MyEquation e);
     public AbstractMap<String,MyEquation> selectAll();
 }

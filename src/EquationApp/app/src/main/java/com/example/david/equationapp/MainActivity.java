@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 123;
     private  static DatabaseController db = new DatabaseController();
+    private static String searchWord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mainSearchButton: {
+                searchWord = ((EditText)findViewById(R.id.mainSearchBox)).getText().toString();
                 Intent myIntent = new Intent(this, SearchActivity.class);
                 this.startActivity(myIntent);
                 break;
@@ -190,5 +193,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public static DatabaseController getDB(){
         return db;
+    }
+    public static String search(){
+        return searchWord;
     }
 }
