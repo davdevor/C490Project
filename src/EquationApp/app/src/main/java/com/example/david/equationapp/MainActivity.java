@@ -49,6 +49,25 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void  onResume(){
+        super.onResume();
+        if(mAuth.getCurrentUser()!=null){
+            setContentView(R.layout.activity_main);
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+        }
+        else{
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(
+                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                            .build(),RC_SIGN_IN);
+        }
+    }
+    @Override
     public void onStart(){
         super.onStart();
         if(mAuth.getCurrentUser()!=null){
