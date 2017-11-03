@@ -32,16 +32,15 @@
         <EditText
             android:id="@+id/mainSearchBox"
             style="@style/EditTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/search"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/mainSearchButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <Button
@@ -49,15 +48,15 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:onClick="onClick"
             android:text="@string/searchButton"
-            app:layout_constraintBottom_toTopOf="@+id/mainAddButton"
-            app:layout_constraintEnd_toEndOf="@+id/mainAddButton"
-            app:layout_constraintStart_toStartOf="@+id/mainAddButton"
-            app:layout_constraintTop_toTopOf="@+id/guideline3"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="@+id/mainSearchBox"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/mainSearchBox"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <Button
             android:id="@+id/mainAllButton"
@@ -94,12 +93,14 @@
         <Button
             android:id="@+id/mainAddButton"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:onClick="onClick"
             android:text="@string/addButton"
             app:layout_constraintBottom_toBottomOf="@+id/mainAllButton"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toEndOf="@+id/mainAllButton"
             app:layout_constraintTop_toTopOf="@+id/mainAllButton" />
 
