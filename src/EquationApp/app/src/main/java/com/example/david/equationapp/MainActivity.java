@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public void  onResume(){
         super.onResume();
         if(mAuth.getCurrentUser()!=null){
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                                             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                             .build(),RC_SIGN_IN);
         }
-    }
+    }*/
     @Override
     public void onStart(){
         super.onStart();
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             startActivityForResult(
                     AuthUI.getInstance()
-                            .createSignInIntentBuilder()
+                            .createSignInIntentBuilder().setIsSmartLockEnabled(false)
                             .setAvailableProviders(
                                     Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                                             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
