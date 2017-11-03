@@ -54,6 +54,8 @@
             android:onClick="onClick"
             android:text="@string/searchButton"
             app:layout_constraintBottom_toBottomOf="@+id/mainSearchBox"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintLeft_toRightOf="@+id/mainSearchBox"
             app:layout_constraintRight_toLeftOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -113,7 +115,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.10"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="20dp" />
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout"

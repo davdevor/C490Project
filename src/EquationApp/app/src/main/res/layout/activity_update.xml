@@ -20,7 +20,8 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="0.461"
     app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
     android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp" />
+    android:layout_marginLeft="8dp"
+    style="@style/EditTextStyle"/>
 
 <EditText
     android:id="@+id/updateInputDescription"
@@ -35,7 +36,8 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="0.461"
     android:layout_marginLeft="8dp"
     app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
-    android:layout_marginRight="8dp" />
+    android:layout_marginRight="8dp"
+    style="@style/EditTextStyle"/>
 
 <EditText
     android:id="@+id/updateInputCourse"
@@ -50,7 +52,8 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="0.461"
     android:layout_marginLeft="8dp"
     app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
-    android:layout_marginRight="8dp" />
+    android:layout_marginRight="8dp"
+    style="@style/EditTextStyle"/>
 
 <EditText
     android:id="@+id/updateInputEquation"
@@ -65,8 +68,8 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="0.461"
     app:layout_constraintRight_toLeftOf="@+id/guidelineupdate4"
     android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp" />
-
+    android:layout_marginLeft="8dp"
+    style="@style/EditTextStyle"/>
 <TextView
     android:textAlignment="center"
     android:id="@+id/updateTextFormat"
@@ -120,7 +123,8 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="0.428"
     android:layout_marginLeft="8dp"
     app:layout_constraintRight_toLeftOf="@+id/updateButtonDelete"
-    android:layout_marginRight="8dp" />
+    android:layout_marginRight="8dp"
+    style="@style/ButtonStyle"/>
 
     <Button
         android:id="@+id/updateButtonDelete"
@@ -131,5 +135,6 @@ android:layout_height="match_parent">
         app:layout_constraintRight_toRightOf="@+id/updateInputEquation"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/updateInputEquation"
-        android:onClick="delete"/>
+        android:onClick="delete"
+        style="@style/ButtonStyle"/>
 </android.support.constraint.ConstraintLayout>

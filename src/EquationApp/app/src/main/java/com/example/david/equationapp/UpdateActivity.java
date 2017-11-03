@@ -48,6 +48,7 @@ public class UpdateActivity extends AppCompatActivity {
             String name = it.next().getName();
             button.setText(name);
             button.setOnClickListener(bh);
+            button.setAllCaps(false);
             ll.addView(button);
         }
         setContentView(sv);
