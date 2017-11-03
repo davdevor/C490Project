@@ -41,6 +41,7 @@ public class AddActivity extends AppCompatActivity {
                 equationET.getText().toString());
                 db.insert(equ);
                 Toast.makeText(this,R.string.equationAdded,Toast.LENGTH_LONG).show();
+                this.finish();
             }
             else{
                 Toast.makeText(this,R.string.equationNameEmpty,Toast.LENGTH_LONG).show();
