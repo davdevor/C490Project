@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/search"
+        android:hint="@string/search"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
