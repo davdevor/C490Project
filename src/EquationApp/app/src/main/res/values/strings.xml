@@ -17,7 +17,7 @@
     <string name="updateButtonUpdate">Update</string>
     <string name="updateButtonDelete">Delete</string>
     <string name="viewequationButtonCompute">Compute</string>
-    <string name="viewequationInputValues">Input values</string>
+    <string name="viewequationInputValues">Input values separated by commas</string>
     <string name="signout">Sign out</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="sign_in_cancelled">Sign in cancelled</string>
@@ -29,4 +29,8 @@
     <string name="equationExists">Equation name already exists</string>
     <string name="equationAdded">Added</string>
     <string name="equationNameEmpty">Please enter a equation name</string>
+    <string name="noDescription">No description provided</string>
+    <string name="noCourse">No course name provided</string>
+    <string name="noEquation">No equation provide</string>
+    <string name="noValues">No values entered</string>
 </resources>

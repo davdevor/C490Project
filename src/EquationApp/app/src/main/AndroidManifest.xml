@@ -24,6 +24,8 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".AllActivity"/>
         <activity android:name=".UpdateActivity"/>
+        <activity android:name=".ComputeActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
     </application>
 

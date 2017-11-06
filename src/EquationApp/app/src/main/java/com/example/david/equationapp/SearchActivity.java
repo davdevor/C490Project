@@ -1,5 +1,6 @@
 package com.example.david.equationapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -8,16 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
 import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
-import com.example.david.equationapp.models.PostfixCalculator;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -25,12 +18,13 @@ import java.util.Iterator;
  * Created by David on 9/25/2017.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseController db = MainActivity.getDB();
     private EditText searchBox;
     private  LinearLayout ll;
     private HashMap<String,MyEquation> equations = db.selectAll();
-    private MyEquation currentEquation;
+    private String BUNDLE_STRING_SEARCH = "search";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,48 +45,33 @@ public class SearchActivity extends AppCompatActivity {
                 Button btn = new Button(this);
                 btn.setAllCaps(false);
                 btn.setText(temp.getName());
-                btn.setOnClickListener(new OnClick());
+                btn.setOnClickListener(this);
                 ll.addView(btn);
             }
         }
     }
-    public void compute(View v){
-        TextView answerTV = (TextView) findViewById(R.id.viewequationAnswer);
-        EditText valuesET = (EditText) findViewById(R.id.viewequationInput);
-        String valuesString = valuesET.getText().toString();
-        valuesString = valuesString.replaceAll("\\s","");;
-        valuesString+=",";
-        ArrayList<String> varValue = new ArrayList<>();
-        StringBuilder temp = new StringBuilder();
-        for(int i = 0, k = valuesString.length(); i < k;i++){
 
-            char digit = valuesString.charAt(i);
-            while (digit!=','&& i < k){
-                temp.append(digit);
-                digit = valuesString.charAt(++i);
-            }
-            varValue.add(temp.toString());
-            temp = new StringBuilder();
-        }
-        PostfixCalculator calc = new PostfixCalculator(currentEquation.getEquation(),varValue);
-        answerTV.setText(Double.toString(calc.getResult()));
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        EditText searchBox = findViewById(R.id.searchBoxSearchActivity);
+        outState.putString(BUNDLE_STRING_SEARCH,searchBox.getText().toString());
+        super.onSaveInstanceState(outState);
     }
-    class OnClick implements View.OnClickListener{
 
-        @Override
-        public void onClick(View view) {
-            setContentView(R.layout.activity_view_equation);
-            TextView nameTV = (TextView)findViewById(R.id.viewequationName);
-            TextView descriptionTV = (TextView) findViewById(R.id.viewequationDescription);
-            TextView courseTV = (TextView) findViewById(R.id.viewequationCourse);
-            TextView equationTV = (TextView) findViewById(R.id.viewequationEquation);
-            Button button = (Button) view;
-            currentEquation = equations.get(button.getText().toString());
-            nameTV.setText(currentEquation.getName());
-            descriptionTV.setText(currentEquation.getDescription());
-            courseTV.setText(currentEquation.getCourse());
-            equationTV.setText(currentEquation.getEquation());
-        }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        EditText searchBox = findViewById(R.id.searchBoxSearchActivity);
+        searchBox.setText(savedInstanceState.getString(BUNDLE_STRING_SEARCH));
+    }
+
+    @Override
+    public void onClick(View view) {
+        Bundle b = new Bundle();
+        b.putString("name",((Button)view).getText().toString());
+        Intent myIntent = new Intent(this,ComputeActivity.class);
+        myIntent.putExtras(b);
+        this.startActivity(myIntent);
     }
 
     class TextChangeListenr implements TextWatcher {
