@@ -115,7 +115,6 @@ public class UpdateActivity extends AppCompatActivity {
 
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
-            //retrieve name and price of candy
             Button button = (Button) v;
             currentEquation = button.getText().toString();
             MyEquation e = equations.get(currentEquation);

@@ -7,8 +7,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.david.equationapp.models.*;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,7 +14,6 @@ import java.util.HashMap;
  */
 
 public class AddActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private IDatabase db = MainActivity.getDB();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +22,10 @@ public class AddActivity extends AppCompatActivity {
     }
     public void setData(View v){
 
-        EditText nameET = (EditText)findViewById(R.id.addInputName);
-        EditText descriptionET = (EditText) findViewById(R.id.addInputDescription);
-        EditText courseET = (EditText) findViewById(R.id.addInputCourse);
-        EditText equationET = (EditText) findViewById(R.id.addInputEquation);
+        EditText nameET = findViewById(R.id.addInputName);
+        EditText descriptionET = findViewById(R.id.addInputDescription);
+        EditText courseET = findViewById(R.id.addInputCourse);
+        EditText equationET = findViewById(R.id.addInputEquation);
 
         String equationName = nameET.getText().toString();
         HashMap<String,MyEquation> temp = (HashMap<String,MyEquation>)db.selectAll();
