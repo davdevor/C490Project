@@ -19,11 +19,23 @@ public class DatabaseController implements IDatabase {
     private HashMap<String,MyEquation> list;
     private final String CHILD_EQUATION = "equations";
     private String CHILD_USER = FirebaseAuth.getInstance().getUid();;
+    private ValueEventListener eventListener;
 
     public DatabaseController(){
-        mDatabase.child(CHILD_EQUATION).addValueEventListener(new DatabaseChange());
+        eventListener = new DatabaseChange();
         list = new HashMap<String,MyEquation>();
     }
+
+    @Override
+    public void addValueEventListener(){
+        mDatabase.child(CHILD_EQUATION).addValueEventListener(eventListener);
+    }
+
+    @Override
+    public void removeValueEventListener(){
+        mDatabase.child(CHILD_EQUATION).removeEventListener(eventListener);
+    }
+
     @Override
     public boolean insert(MyEquation e){
             mDatabase.child(CHILD_EQUATION).child(CHILD_USER).child(e.getName()).setValue(e);

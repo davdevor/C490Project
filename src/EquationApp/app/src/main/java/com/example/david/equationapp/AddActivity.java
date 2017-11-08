@@ -20,6 +20,14 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
     }
+    protected void onResume(){
+        super.onResume();
+        db.addValueEventListener();
+    }
+    protected void onPause(){
+        db.removeValueEventListener();
+        super.onPause();
+    }
     public void setData(View v){
 
         EditText nameET = findViewById(R.id.addInputName);

@@ -29,6 +29,14 @@ public class AllActivity extends AppCompatActivity implements View.OnClickListen
         equations = (HashMap<String,MyEquation>)db.selectAll();
         createView();
     }
+    protected void onResume(){
+        super.onResume();
+        db.addValueEventListener();
+    }
+    protected void onPause(){
+        db.removeValueEventListener();
+        super.onPause();
+    }
     public void createView(){
         sv = new ScrollView(this);
         ll = new LinearLayout(this);

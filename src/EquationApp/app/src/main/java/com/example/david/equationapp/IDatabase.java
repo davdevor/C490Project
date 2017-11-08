@@ -16,4 +16,6 @@ public interface IDatabase {
     public boolean updateByName(MyEquation e);
     public boolean deleteByName(MyEquation e);
     public AbstractMap<String,MyEquation> selectAll();
+    public void addValueEventListener();
+    public void removeValueEventListener();
 }

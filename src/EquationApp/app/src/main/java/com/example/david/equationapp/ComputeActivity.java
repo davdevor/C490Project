@@ -32,6 +32,14 @@ public class ComputeActivity extends AppCompatActivity {
             createView();
         }
     }
+    protected void onResume(){
+        super.onResume();
+        db.addValueEventListener();
+    }
+    protected void onPause(){
+        db.removeValueEventListener();
+        super.onPause();
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState){

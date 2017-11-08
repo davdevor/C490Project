@@ -25,6 +25,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private HashMap<String,MyEquation> equations = db.selectAll();
     private String BUNDLE_STRING_SEARCH = "search";
 
+    protected void onResume(){
+        super.onResume();
+        db.addValueEventListener();
+    }
+    protected void onPause(){
+        db.removeValueEventListener();
+        super.onPause();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
+        db.addValueEventListener();
         signIn();
 
     }
     protected void onPause(){
+        db.removeValueEventListener();
         super.onPause();
     }
     private void signIn(){
