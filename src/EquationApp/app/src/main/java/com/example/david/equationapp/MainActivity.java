@@ -48,7 +48,30 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    protected void onResume(){
+        super.onResume();
+        signIn();
 
+    }
+    protected void onPause(){
+        super.onPause();
+    }
+    private void signIn(){
+        if(mAuth.getCurrentUser()!=null){
+            setContentView(R.layout.activity_main);
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+        }
+        else{
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()//.setIsSmartLockEnabled(false)
+                            .setAvailableProviders(
+                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                            .build(),RC_SIGN_IN);
+        }
+    }
     /*@Override
     public void  onResume(){
         super.onResume();
@@ -70,20 +93,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
-        if(mAuth.getCurrentUser()!=null){
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
-        else{
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder().setIsSmartLockEnabled(false)
-                            .setAvailableProviders(
-                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                            .build(),RC_SIGN_IN);
-        }
     }
     /* Doens't work properly need to find the view the sign is on
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
