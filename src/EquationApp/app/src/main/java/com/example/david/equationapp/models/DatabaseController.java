@@ -1,25 +1,13 @@
 package com.example.david.equationapp.models;
 
-import android.util.Log;
-
 import com.example.david.equationapp.IDatabase;
-import com.example.david.equationapp.MainActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-
 
 /**
  * Created by David on 10/21/2017.
@@ -31,11 +19,23 @@ public class DatabaseController implements IDatabase {
     private HashMap<String,MyEquation> list;
     private final String CHILD_EQUATION = "equations";
     private String CHILD_USER = FirebaseAuth.getInstance().getUid();;
+    private ValueEventListener eventListener;
 
     public DatabaseController(){
-        mDatabase.child(CHILD_EQUATION).addValueEventListener(new DatabaseChange());
+        eventListener = new DatabaseChange();
         list = new HashMap<String,MyEquation>();
     }
+
+    @Override
+    public void addValueEventListener(){
+        mDatabase.child(CHILD_EQUATION).addValueEventListener(eventListener);
+    }
+
+    @Override
+    public void removeValueEventListener(){
+        mDatabase.child(CHILD_EQUATION).removeEventListener(eventListener);
+    }
+
     @Override
     public boolean insert(MyEquation e){
             mDatabase.child(CHILD_EQUATION).child(CHILD_USER).child(e.getName()).setValue(e);

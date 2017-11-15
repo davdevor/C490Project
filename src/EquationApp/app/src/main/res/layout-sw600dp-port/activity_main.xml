@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:layout_height="match_parent">
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -50,8 +53,9 @@
         android:onClick="onClick"
         android:text="@string/searchButton"
         app:layout_constraintBottom_toBottomOf="@+id/mainSearchBox"
-        app:layout_constraintRight_toLeftOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/mainSearchBox" />
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintLeft_toRightOf="@+id/mainSearchBox"
+        app:layout_constraintRight_toLeftOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/mainAllButton"
@@ -76,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:onClick="onClick"
         android:text="@string/updateButton"
         app:layout_constraintBottom_toTopOf="@+id/mainAddButton"
@@ -106,7 +110,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.10"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="20dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
