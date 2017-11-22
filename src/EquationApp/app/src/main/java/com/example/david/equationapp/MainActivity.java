@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
     protected void onPause(){
-        db.removeValueEventListener();
+        if(mAuth.getCurrentUser()!=null){
+            db.removeValueEventListener();
+        }
         super.onPause();
     }
     private void signIn(){
