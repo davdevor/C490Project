@@ -35,7 +35,7 @@ import static android.R.attr.duration;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 123;
-    private  static DatabaseController db = new DatabaseController();
+    private  static DatabaseController db;
     private static String searchWord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
-        db.addValueEventListener();
         signIn();
 
     }
     protected void onPause(){
-        db.removeValueEventListener();
+        if(mAuth.getCurrentUser()!=null){
+            db.removeValueEventListener();
+        }
         super.onPause();
     }
     private void signIn(){
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            db = new DatabaseController();
+            db.addValueEventListener();
         }
         else{
             startActivityForResult(
@@ -74,24 +77,6 @@ public class MainActivity extends AppCompatActivity {
                             .build(),RC_SIGN_IN);
         }
     }
-    /*@Override
-    public void  onResume(){
-        super.onResume();
-        if(mAuth.getCurrentUser()!=null){
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-        }
-        else{
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(
-                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                            .build(),RC_SIGN_IN);
-        }
-    }*/
     @Override
     public void onStart(){
         super.onStart();
