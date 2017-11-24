@@ -11,7 +11,7 @@
     <string name="addInputCourse">Course name</string>
     <string name="addInputDescription">Description</string>
     <string name="addInputName">Equation Name</string>
-    <string name="addTextFormat">PUTT IN ACTUAL TEXT</string>
+    <string name="addTextFormat"></string>
     <string name="addButtonAdd">Add</string>
     <string name="allButtonUpdate">update</string>
     <string name="updateButtonUpdate">Update</string>
