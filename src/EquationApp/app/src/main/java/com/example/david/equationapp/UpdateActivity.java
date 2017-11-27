@@ -39,10 +39,12 @@ public class UpdateActivity extends AppCompatActivity {
         }
 
     }
+    @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+    @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();

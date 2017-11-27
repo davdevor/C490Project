@@ -32,10 +32,12 @@ public class ComputeActivity extends AppCompatActivity {
             createView();
         }
     }
+    @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+    @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();

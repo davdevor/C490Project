@@ -25,10 +25,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private HashMap<String,MyEquation> equations = db.selectAll();
     private String BUNDLE_STRING_SEARCH = "search";
 
+    @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+    @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
@@ -43,6 +45,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchBox.addTextChangedListener(new TextChangeListenr());
         updateView();
     }
+
     public void updateView() {
         ll.removeAllViews();
         Iterator<MyEquation> it = equations.values().iterator();

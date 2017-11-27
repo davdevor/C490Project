@@ -20,10 +20,12 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
     }
+    @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+    @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
