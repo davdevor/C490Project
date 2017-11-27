@@ -24,15 +24,18 @@ public class AllActivity extends AppCompatActivity implements View.OnClickListen
     private LinearLayout ll;
     private ScrollView sv;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         equations = (HashMap<String,MyEquation>)db.selectAll();
         createView();
     }
+    @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+    @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();

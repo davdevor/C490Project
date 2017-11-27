@@ -37,28 +37,48 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private  static DatabaseController db;
     private static String searchWord;
+    private static String BUNDLE_STRING_SEARCH = "mainSearch";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
     protected void onResume(){
         super.onResume();
         signIn();
 
     }
+
+    @Override
     protected void onPause(){
         if(mAuth.getCurrentUser()!=null){
             db.removeValueEventListener();
         }
         super.onPause();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        EditText searchBox = findViewById(R.id.mainSearchBox);
+        outState.putString(BUNDLE_STRING_SEARCH,searchBox.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        EditText searchBox = findViewById(R.id.mainSearchBox);
+        searchBox.setText(savedInstanceState.getString(BUNDLE_STRING_SEARCH));
+    }
+
     private void signIn(){
         if(mAuth.getCurrentUser()!=null){
             setContentView(R.layout.activity_main);
@@ -77,57 +97,9 @@ public class MainActivity extends AppCompatActivity {
                             .build(),RC_SIGN_IN);
         }
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-    }
-    /* Doens't work properly need to find the view the sign is on
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
-        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
-                .findViewById(android.R.id.content)).getChildAt(0);
-        ;
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
 
-            // Successfully signed in
-            if (resultCode == RESULT_OK) {
-                //may be inccorect TO DO
-                startActivity(new Intent(new Intent(MainActivity.this, MainActivity.class)));
-                finish();
-                return;
-            } else {
-                // Sign in failed
-                if (response == null) {
-                    // User pressed back button
-                    Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.sign_in_cancelled, Snackbar.LENGTH_SHORT);
-                    mySnackbar.show();
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    Snackbar mySnackbar = Snackbar.make(viewGroup.getChildAt(0), R.string.no_internet_connection, Snackbar.LENGTH_SHORT);
-                    mySnackbar.show();
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.unknown_error, Snackbar.LENGTH_SHORT);
-                    mySnackbar.show();
-                    return;
-                }
-            }
-            Snackbar mySnackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), R.string.unknown_sign_in_response, Snackbar.LENGTH_SHORT);
-            mySnackbar.show();
-        }
-    }
-    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch(id){
             case R.id.app_bar_signout:{
