@@ -18,7 +18,7 @@ public class PostfixCalculator {
     private final static int PRECEDENCE_PARANTHESIS=  4;
     private final static int PRECENDENCE_NEGATIVE =5;
 
-    public PostfixCalculator(String s,ArrayList<String> varsValue){
+    public PostfixCalculator(String s,ArrayList<String> varsValue)throws MyParseException{
         equation = s;
         this.varsValue = varsValue;
         getVars();
@@ -94,7 +94,7 @@ public class PostfixCalculator {
         return true ;
     }
 
-    private void parseRPN(){
+    private void parseRPN()throws MyParseException{
         String rpnStr = equation;
         String[] tokens = rpnStr.split("\\s+");//remove all white space
 
@@ -116,7 +116,7 @@ public class PostfixCalculator {
                     if (numberStack.size() < 2) {
 
                         System.out.println("Invalid Syntax, operator " + token + " must be preceeded by at least two operands");
-                        return;
+                        throw new MyParseException("ParseError");
                     }
                     double num1 = numberStack.pop();
                     double num2 = numberStack.pop();
@@ -263,4 +263,5 @@ public class PostfixCalculator {
 
     }*/
 }
+
 
