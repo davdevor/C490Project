@@ -6,10 +6,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
+import com.example.david.equationapp.models.MyParseException;
 import com.example.david.equationapp.models.PostfixCalculator;
+
 import java.util.ArrayList;
 
 /**
@@ -119,8 +120,18 @@ public class ComputeActivity extends AppCompatActivity {
                 varValue.add(temp.toString());
                 temp = new StringBuilder();
             }
-            PostfixCalculator calc = new PostfixCalculator(currentEquation.getEquation(), varValue);
-            answerTV.setText(Double.toString(calc.getResult()));
+            try {
+                PostfixCalculator calc = new PostfixCalculator(currentEquation.getEquation(), varValue);
+                answerTV.setText(Double.toString(calc.getResult()));
+            }
+            catch (MyParseException e){
+
+            }
+            finally {
+                Toast.makeText(this,R.string.ParseException,Toast.LENGTH_LONG).show();
+                return;
+            }
+
         }
     }
 }

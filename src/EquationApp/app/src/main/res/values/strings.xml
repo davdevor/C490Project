@@ -33,4 +33,5 @@
     <string name="noCourse">No course name provided</string>
     <string name="noEquation">No equation provided</string>
     <string name="noValues">No values entered</string>
+    <string name="ParseException">Parse Error</string>
 </resources>
