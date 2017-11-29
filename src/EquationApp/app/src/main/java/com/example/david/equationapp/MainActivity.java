@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState){
         EditText searchBox = findViewById(R.id.mainSearchBox);
-        outState.putString(BUNDLE_STRING_SEARCH,searchBox.getText().toString());
+        if(searchBox!=null) {
+            outState.putString(BUNDLE_STRING_SEARCH, searchBox.getText().toString());
+        }
         super.onSaveInstanceState(outState);
     }
 

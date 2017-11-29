@@ -120,15 +120,17 @@ public class ComputeActivity extends AppCompatActivity {
                 varValue.add(temp.toString());
                 temp = new StringBuilder();
             }
+            boolean error = false;
             try {
                 PostfixCalculator calc = new PostfixCalculator(currentEquation.getEquation(), varValue);
                 answerTV.setText(Double.toString(calc.getResult()));
             }
             catch (MyParseException e){
-
+                error = true;
             }
             finally {
-                Toast.makeText(this,R.string.ParseException,Toast.LENGTH_LONG).show();
+                if(error)
+                    Toast.makeText(this,R.string.ParseException,Toast.LENGTH_LONG).show();
                 return;
             }
 
