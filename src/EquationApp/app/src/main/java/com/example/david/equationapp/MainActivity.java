@@ -27,18 +27,35 @@ public class MainActivity extends AppCompatActivity {
     private  static DatabaseController db;
     private static String searchWord;
     private static String BUNDLE_STRING_SEARCH = "mainSearch";
+
+    /**
+     *
+     * the onCreate method is used to initialize the FirebaseAuth object
+     *
+     * @param savedInstanceState the bundle passed to the method, its not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
     }
 
+    /**
+     *
+     * this method inflates the xml file for the options menu
+     *
+     * @param menu
+     * @return true, the menu gets inflated
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * in this method I call the signIn method
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -46,14 +63,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * in this method I remove the database listener when the activity pauses, so
+     * it does not use up the battery
+     */
     @Override
     protected void onPause(){
+        // the user has to be not null to remove the database listener
+        // the database listener only gets set once the user is signed in
         if(mAuth.getCurrentUser()!=null){
             db.removeValueEventListener();
         }
         super.onPause();
     }
 
+    /**
+     *
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState){
         EditText searchBox = findViewById(R.id.mainSearchBox);
