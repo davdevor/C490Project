@@ -15,6 +15,7 @@ import com.example.david.equationapp.models.MyEquation;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by David on 9/25/2017.
@@ -108,6 +109,9 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * this method is used to build the list view of all the equations that the user can edit
+     */
     public void createView() {
         sv = new ScrollView(this);
         ll = new LinearLayout(this);
@@ -116,11 +120,9 @@ public class UpdateActivity extends AppCompatActivity {
         Log.d("Look",equations.toString());
         Button button;
         ButtonHandler bh = new ButtonHandler();
-        Collection<MyEquation> temp = equations.values();
-        Iterator<MyEquation> it = temp.iterator();
-        for (int i = 0, j = equations.size(); i < j; i++) {
+        for (Map.Entry<String,MyEquation> x:equations.entrySet()) {
             button = new Button(this);
-            String name = it.next().getName();
+            String name = x.getValue().getName();
             button.setText(name);
             button.setOnClickListener(bh);
             button.setAllCaps(false);
