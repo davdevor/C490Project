@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * this method is used to save the string in the search box in the activity_main.xml view
      *
-     * @param outState
+     * @param outState the bundle object holding the out state
      */
     @Override
     public void onSaveInstanceState(Bundle outState){
@@ -90,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * this method is used to restore the string in the search box
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
@@ -97,30 +102,44 @@ public class MainActivity extends AppCompatActivity {
         searchBox.setText(savedInstanceState.getString(BUNDLE_STRING_SEARCH));
     }
 
+    /**
+     * this method is used to handle signing in the user
+     */
     private void signIn(){
+        //if current user is not null then they are signed in
+        //so bring them to the main screen for the app
         if(mAuth.getCurrentUser()!=null){
+            //setcontentview and toolbar
             setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            //initialize the database controller object that all the other activities use
             db = new DatabaseController();
             db.addValueEventListener();
         }
         else{
+            //else not signed in start firebase AuthUI to let user sign in
             startActivityForResult(
                     AuthUI.getInstance()
-                            .createSignInIntentBuilder()//.setIsSmartLockEnabled(false)
+                            .createSignInIntentBuilder()
                             .setAvailableProviders(
-                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(), //only builds the google signin and email
                                             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                             .build(),RC_SIGN_IN);
         }
     }
 
+    /**
+     * this method handles the clicks on the options menu
+     * @param item
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch(id){
             case R.id.app_bar_signout:{
+                // if they clicked sign out call the firebase signout
                 AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -131,10 +150,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.app_bar_delete_account:{
+
                 final MainActivity temp = this;
+                //bring up an alert dialog to confirm the user deleting their account
                 new AlertDialog.Builder(this)
                         .setTitle("")
                         .setMessage("Do you really want to delete your account?")
+                        //here it sets the positivie buttons action which is the firebase account deletion
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
@@ -169,25 +191,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * this method handles the clicks for the buttons on the activity_main.xml view
+     * @param v the view that got clicked
+     */
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mainSearchButton: {
                 searchWord = ((EditText)findViewById(R.id.mainSearchBox)).getText().toString();
+                //if search box clicked go to SearchActivity
                 Intent myIntent = new Intent(this, SearchActivity.class);
                 this.startActivity(myIntent);
                 break;
             }
             case R.id.mainAllButton: {
+                //go to AllActivity
                 Intent myIntent = new Intent(this, AllActivity.class);
                 this.startActivity(myIntent);
                 break;
             }
             case R.id.mainAddButton: {
+                //go to AddActivity
                 Intent myIntent = new Intent(this, AddActivity.class);
                 this.startActivity(myIntent);
                 break;
             }
             case R.id.mainUpdateButton: {
+                //go to UpdateActivity
                 Intent myIntent = new Intent(this, UpdateActivity.class);
                 this.startActivity(myIntent);
                 break;
@@ -196,9 +226,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    /**
+     * this method is used by all activites so they can get a reference to the database
+     * @return a DatabaseController that all the activities will use
+     */
     public static DatabaseController getDB(){
         return db;
     }
+
+    /**
+     * this method is used by the search activity, so it can know what the initial search is
+     * @return a string of the search word in the search box
+     */
     public static String search(){
         return searchWord;
     }
