@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.david.equationapp.models.*;
-import com.google.firebase.auth.FirebaseAuth;
 import java.util.HashMap;
 
 /**

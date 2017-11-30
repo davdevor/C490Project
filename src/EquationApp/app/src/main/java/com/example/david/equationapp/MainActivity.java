@@ -10,26 +10,15 @@ import android.view.Menu;
 import android.view.View;
 
 import com.example.david.equationapp.models.DatabaseController;
-import com.firebase.ui.auth.*;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import  com.google.firebase.auth.*;
 import android.view.MenuItem;
 import android.content.DialogInterface;
-import android.support.design.widget.Snackbar;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.crash.FirebaseCrash;
-
 import java.util.Arrays;
-
-import static android.R.attr.duration;
 
 
 public class MainActivity extends AppCompatActivity {
