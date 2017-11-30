@@ -31,24 +31,43 @@ public class UpdateActivity extends AppCompatActivity {
     private final String BUNDLE_STRING_COURSE = "course";
     private ScrollView sv;
 
+    /**
+     * this methos calls createview if bundle is null
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if savedInstanceState is null that means you are sill on the screen with list of equations
+        //instead of on screen where you are editing the equation
         if(savedInstanceState==null){
             createView();
         }
 
     }
+
+    /**
+     * this method is used to add the eventlistener on the database
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method is used to remove the eventlistener on the database
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
+
+    /**
+     * this method is used to save the data on the editing screen
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState){
         try{
@@ -58,12 +77,16 @@ public class UpdateActivity extends AppCompatActivity {
             outState.putString(BUNDLE_STRING_NEW_EQUATION,((EditText)findViewById(R.id.updateInputEquation)).getText().toString());
         }
         catch (NullPointerException e){
-
+            //if nullpointer happened the app wasn't on the editing screen so do nothing
         }
 
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * this method is used to restore the data on the editing screen
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
