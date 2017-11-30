@@ -21,20 +21,33 @@ import java.util.Iterator;
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseController db = MainActivity.getDB();
     private EditText searchBox;
-    private  LinearLayout ll;
+    private LinearLayout ll;
     private HashMap<String,MyEquation> equations = db.selectAll();
     private String BUNDLE_STRING_SEARCH = "search";
 
+    /**
+     * this method is used to add the database event listener
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method is used to remove the database event listener
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
+
+    /**
+     * this method is used to set the content view and set the text of the search box with the
+     * search word from the main activity, also calls update view
+     * @param savedInstanceState not used
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +55,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchBox = findViewById(R.id.searchBoxSearchActivity);
         ll = findViewById(R.id.linearLayoutSearchActivity);
         searchBox.setText(MainActivity.search().toLowerCase());
+        //adds a new TextChangeListener so when the text changes it will search again with new word
         searchBox.addTextChangedListener(new TextChangeListenr());
         updateView();
     }
 
+    /**
+     * this method updates the listview with a list of equations similar to the search term
+     */
     public void updateView() {
+        //reset the list on screen
         ll.removeAllViews();
+        //gets an iterator from the hashmap of equations
         Iterator<MyEquation> it = equations.values().iterator();
+        //get the search term
         String search = searchBox.getText().toString().toLowerCase();
         while (it.hasNext()) {
             MyEquation temp = it.next();
+            //if name of equation contains search word add it to listview
             if (temp.getName().toLowerCase().contains(search)) {
                 Button btn = new Button(this);
                 btn.setAllCaps(false);
