@@ -84,6 +84,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * this method is to save the search string in the bundle
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState){
         EditText searchBox = findViewById(R.id.searchBoxSearchActivity);
@@ -91,6 +95,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * this method is used to restore the search string in the search box
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
@@ -98,10 +106,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchBox.setText(savedInstanceState.getString(BUNDLE_STRING_SEARCH));
     }
 
+    /**
+     * this method handles the the clicks on the buttons in the list view
+     * @param view
+     */
     @Override
     public void onClick(View view) {
+        // create a new bundle object and put the name of the equation clicked in the bundle
         Bundle b = new Bundle();
         b.putString("name",((Button)view).getText().toString());
+        //create a new intent of the ComputeActivity and putExtras the custom bundle object
+        //so when the activity starts it knows what equation it should display
         Intent myIntent = new Intent(this,ComputeActivity.class);
         myIntent.putExtras(b);
         this.startActivity(myIntent);
