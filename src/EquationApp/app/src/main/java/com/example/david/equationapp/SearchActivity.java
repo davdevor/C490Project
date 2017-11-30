@@ -13,6 +13,7 @@ import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by David on 9/25/2017.
@@ -70,13 +71,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Iterator<MyEquation> it = equations.values().iterator();
         //get the search term
         String search = searchBox.getText().toString().toLowerCase();
-        while (it.hasNext()) {
-            MyEquation temp = it.next();
-            //if name of equation contains search word add it to listview
-            if (temp.getName().toLowerCase().contains(search)) {
+        //for each loop going over each item in the equation hashmap
+        for (Map.Entry<String,MyEquation> temp: equations.entrySet()) {
+            //if equation name contains the search string then add it to list view
+            if (temp.getValue().getName().toLowerCase().contains(search)) {
                 Button btn = new Button(this);
                 btn.setAllCaps(false);
-                btn.setText(temp.getName());
+                btn.setText(temp.getValue().getName());
                 btn.setOnClickListener(this);
                 ll.addView(btn);
             }
