@@ -57,7 +57,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         ll = findViewById(R.id.linearLayoutSearchActivity);
         searchBox.setText(MainActivity.search().toLowerCase());
         //adds a new TextChangeListener so when the text changes it will search again with new word
-        searchBox.addTextChangedListener(new TextChangeListenr());
+        searchBox.addTextChangedListener(new TextChangeListener());
         updateView();
     }
 
@@ -122,7 +122,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         this.startActivity(myIntent);
     }
 
-    class TextChangeListenr implements TextWatcher {
+    class TextChangeListener implements TextWatcher {
         @Override
         public void afterTextChanged(Editable e)
         {
