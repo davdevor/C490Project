@@ -130,6 +130,11 @@ public class UpdateActivity extends AppCompatActivity {
         }
         setContentView(sv);
     }
+
+    /**
+     * this method is used to handle updating the database with the new information
+     * @param v
+     */
     public void update(View v){
         EditText descriptionET = findViewById(R.id.updateInputDescription);
         EditText courseET = findViewById(R.id.updateInputCourse);
@@ -141,6 +146,11 @@ public class UpdateActivity extends AppCompatActivity {
         db.updateByName(equ);
         createView();
     }
+
+    /**
+     * this method handles deleting equation from the database
+     * @param v
+     */
     public void delete(View v){
         db.deleteByName(equations.get(currentEquation));
         equations.remove(currentEquation);
@@ -148,6 +158,10 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * this class handles the button clicks in the listview
+     * when a button is clicked it changes the view to the editing screen
+     */
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
             Button button = (Button) v;
