@@ -122,10 +122,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         this.startActivity(myIntent);
     }
 
+    /**
+     * this class is used to handle the when the text changes on the searchbox to immediately update the list
+     */
     class TextChangeListener implements TextWatcher {
         @Override
         public void afterTextChanged(Editable e)
         {
+            //once text has changed update view
             updateView();
         }
 
