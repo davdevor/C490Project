@@ -24,26 +24,42 @@ public class ComputeActivity extends AppCompatActivity {
     private final String BUNDLE_STRING_EQUATION ="name";
     private final String BUNDLE_STRING_VALUES = "values";
 
+    /**
+     * this method gets the equation name from the bundle that was passed to the method
+     * @param savedInstanceState
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = this.getIntent().getExtras();
-        if(b != null) {
+        if (b != null) {
             currentEquation = db.selectAll().get(b.getString("name"));
             createView();
         }
     }
+
+    /**
+     * this method adds the database event listener
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method removes the database event listener
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
 
+    /**
+     * this method saves the equation name and the data they inputted for the equation to be solved with
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState){
         outState.putString(BUNDLE_STRING_EQUATION,currentEquation.getName());
@@ -51,6 +67,10 @@ public class ComputeActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * this method restores the current equation and the values to solve with
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
@@ -59,6 +79,9 @@ public class ComputeActivity extends AppCompatActivity {
         createView();
     }
 
+    /**
+     * this method brings up the view to solve the equation
+     */
     public void createView(){
         setContentView(R.layout.activity_view_equation);
         TextView nameTV = findViewById(R.id.viewequationName);
@@ -72,6 +95,7 @@ public class ComputeActivity extends AppCompatActivity {
         equation = currentEquation.getEquation();
         nameTV.setText(equationName);
 
+        //the if statements are use to put text in text boxes if the equation object has no info for it
         if(equationDescription.length() == 0){
             descriptionTV.setText(R.string.noDescription);
         }
@@ -98,6 +122,11 @@ public class ComputeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * this method handles the computation of the equation with the data entered
+     * it uses the PostFix calculator model to solve the equation
+     * @param v
+     */
     public void compute(View v){
         TextView answerTV =  findViewById(R.id.viewequationAnswer);
         EditText valuesET =  findViewById(R.id.viewequationInput);
