@@ -152,7 +152,10 @@ public class UpdateActivity extends AppCompatActivity {
      * @param v
      */
     public void delete(View v){
+        //delete from database
         db.deleteByName(equations.get(currentEquation));
+        //you have to delete from the current list of equations
+        //becuase the view gets brought up before the database controller updates the list for you
         equations.remove(currentEquation);
         createView();
 
