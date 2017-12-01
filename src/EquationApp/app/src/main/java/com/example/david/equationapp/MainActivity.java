@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
+import com.example.david.equationapp.DepencencyInjection.DaggerEquationAppComponent;
+import com.example.david.equationapp.DepencencyInjection.EquationAppComponent;
+import com.example.david.equationapp.DepencencyInjection.IDatabaseModule;
 import com.example.david.equationapp.models.DatabaseController;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +22,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.Arrays;
+
+import javax.inject.Inject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -114,7 +119,11 @@ public class MainActivity extends AppCompatActivity {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             //initialize the database controller object that all the other activities use
-            db = new DatabaseController();
+            if(db == null){
+                //uses dagger depencecy injector
+                EquationAppComponent component = DaggerEquationAppComponent.builder().build();
+                db = component.getIDatabsae();
+            }
             db.addValueEventListener();
         }
         else{
