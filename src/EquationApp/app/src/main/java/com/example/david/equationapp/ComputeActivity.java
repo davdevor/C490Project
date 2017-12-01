@@ -26,7 +26,7 @@ public class ComputeActivity extends AppCompatActivity {
 
     /**
      * this method gets the equation name from the bundle that was passed to the method
-     * @param savedInstanceState
+     * @param savedInstanceState the bundle has to have the equation name in a string with key "name"
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
