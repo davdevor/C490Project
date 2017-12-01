@@ -14,23 +14,41 @@ import java.util.HashMap;
 
 public class AddActivity extends AppCompatActivity {
     private IDatabase db = MainActivity.getDB();
+
+    /**
+     * this method is used to set the content view to activity_add.xml
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
     }
+
+    /**
+     * this method is used to add the event listener to the database
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method is used to remove the event listener from the database
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
-    public void setData(View v){
 
+    /**
+     * this method is used to handle the click on the add button on the activity_add.xml screen
+     * @param v the view that was clicked
+     */
+    public void setData(View v){
+        //get references to the edit texts from the view
         EditText nameET = findViewById(R.id.addInputName);
         EditText descriptionET = findViewById(R.id.addInputDescription);
         EditText courseET = findViewById(R.id.addInputCourse);
@@ -39,7 +57,9 @@ public class AddActivity extends AppCompatActivity {
         String equationName = nameET.getText().toString();
         HashMap<String,MyEquation> temp = (HashMap<String,MyEquation>)db.selectAll();
 
+        //check and see if the equation name already exists
         if(!temp.containsKey(equationName)){
+            //make sure name isn't empty
             if(!equationName.equals("")){
                 MyEquation equ = new MyEquation(equationName,
                 descriptionET.getText().toString(),
