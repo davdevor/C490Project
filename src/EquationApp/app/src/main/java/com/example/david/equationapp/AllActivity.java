@@ -24,22 +24,40 @@ public class AllActivity extends AppCompatActivity implements View.OnClickListen
     private LinearLayout ll;
     private ScrollView sv;
 
+    /**
+     * this method is used to initalize the list of equations and
+     * call the createview method
+     * @param savedInstanceState not used
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         equations = (HashMap<String,MyEquation>)db.selectAll();
         createView();
     }
+
+    /**
+     * this method is used to add the database event listener
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method is used to remove the database event listener
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
+
+    /**
+     * this method is used to create the view
+     * it is a list of all equations
+     */
     public void createView(){
         sv = new ScrollView(this);
         ll = new LinearLayout(this);
