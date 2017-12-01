@@ -75,8 +75,14 @@ public class AllActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(sv);
     }
 
+    /**
+     * this method handles the clicks for the list of buttons for the equations
+     * @param view the button passed to the method
+     */
     @Override
     public void onClick(View view) {
+        //create a new bundle and add the string of the equation name
+        //so when the compute activity starts it knows which equation to use
         Bundle b = new Bundle();
         b.putString("name",((Button)view).getText().toString());
         Intent myIntent = new Intent(this,ComputeActivity.class);
