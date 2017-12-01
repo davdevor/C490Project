@@ -12,17 +12,20 @@ import android.widget.TextView;
 
 import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
+
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by David on 9/25/2017.
  */
 
 public class UpdateActivity extends AppCompatActivity {
-    private DatabaseController db = MainActivity.getDB();
-    private HashMap<String,MyEquation> equations = db.selectAll();
+    private IDatabase db = MainActivity.getDB();
+    private AbstractMap<String,MyEquation> equations = db.selectAll();
     private LinearLayout ll;
     private String currentEquation;
     private final String BUNDLE_STRING_EQUATION = "currentequation";
@@ -31,24 +34,43 @@ public class UpdateActivity extends AppCompatActivity {
     private final String BUNDLE_STRING_COURSE = "course";
     private ScrollView sv;
 
+    /**
+     * this methos calls createview if bundle is null
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if savedInstanceState is null that means you are sill on the screen with list of equations
+        //instead of on screen where you are editing the equation
         if(savedInstanceState==null){
             createView();
         }
 
     }
+
+    /**
+     * this method is used to add the eventlistener on the database
+     */
     @Override
     protected void onResume(){
         super.onResume();
         db.addValueEventListener();
     }
+
+    /**
+     * this method is used to remove the eventlistener on the database
+     */
     @Override
     protected void onPause(){
         db.removeValueEventListener();
         super.onPause();
     }
+
+    /**
+     * this method is used to save the data on the editing screen
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState){
         try{
@@ -58,12 +80,16 @@ public class UpdateActivity extends AppCompatActivity {
             outState.putString(BUNDLE_STRING_NEW_EQUATION,((EditText)findViewById(R.id.updateInputEquation)).getText().toString());
         }
         catch (NullPointerException e){
-
+            //if nullpointer happened the app wasn't on the editing screen so do nothing
         }
 
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * this method is used to restore the data on the editing screen
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
@@ -85,6 +111,9 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * this method is used to build the list view of all the equations that the user can edit
+     */
     public void createView() {
         sv = new ScrollView(this);
         ll = new LinearLayout(this);
@@ -93,11 +122,9 @@ public class UpdateActivity extends AppCompatActivity {
         Log.d("Look",equations.toString());
         Button button;
         ButtonHandler bh = new ButtonHandler();
-        Collection<MyEquation> temp = equations.values();
-        Iterator<MyEquation> it = temp.iterator();
-        for (int i = 0, j = equations.size(); i < j; i++) {
+        for (Map.Entry<String,MyEquation> x:equations.entrySet()) {
             button = new Button(this);
-            String name = it.next().getName();
+            String name = x.getValue().getName();
             button.setText(name);
             button.setOnClickListener(bh);
             button.setAllCaps(false);
@@ -105,6 +132,11 @@ public class UpdateActivity extends AppCompatActivity {
         }
         setContentView(sv);
     }
+
+    /**
+     * this method is used to handle updating the database with the new information
+     * @param v
+     */
     public void update(View v){
         EditText descriptionET = findViewById(R.id.updateInputDescription);
         EditText courseET = findViewById(R.id.updateInputCourse);
@@ -116,13 +148,25 @@ public class UpdateActivity extends AppCompatActivity {
         db.updateByName(equ);
         createView();
     }
+
+    /**
+     * this method handles deleting equation from the database
+     * @param v
+     */
     public void delete(View v){
+        //delete from database
         db.deleteByName(equations.get(currentEquation));
+        //you have to delete from the current list of equations
+        //becuase the view gets brought up before the database controller updates the list for you
         equations.remove(currentEquation);
         createView();
 
     }
 
+    /**
+     * this class handles the button clicks in the listview
+     * when a button is clicked it changes the view to the editing screen
+     */
     private class ButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
             Button button = (Button) v;
