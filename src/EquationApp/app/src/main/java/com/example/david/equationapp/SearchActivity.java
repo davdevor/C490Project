@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
+
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,10 +22,10 @@ import java.util.Map;
  */
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
-    private DatabaseController db = MainActivity.getDB();
+    private IDatabase db = MainActivity.getDB();
     private EditText searchBox;
     private LinearLayout ll;
-    private HashMap<String,MyEquation> equations = db.selectAll();
+    private AbstractMap<String,MyEquation> equations = db.selectAll();
     private String BUNDLE_STRING_SEARCH = "search";
 
     /**

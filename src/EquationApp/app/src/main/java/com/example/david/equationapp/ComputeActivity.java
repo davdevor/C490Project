@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class ComputeActivity extends AppCompatActivity {
     private MyEquation currentEquation;
-    private DatabaseController db = MainActivity.getDB();
+    private IDatabase db = MainActivity.getDB();
     private String equationName, equationDescription, equationCourse, equation,values;
     private final String BUNDLE_STRING_EQUATION ="name";
     private final String BUNDLE_STRING_VALUES = "values";

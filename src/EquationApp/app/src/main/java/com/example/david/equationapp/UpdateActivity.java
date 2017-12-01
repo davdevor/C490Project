@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.david.equationapp.models.DatabaseController;
 import com.example.david.equationapp.models.MyEquation;
+
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,8 +24,8 @@ import java.util.Map;
  */
 
 public class UpdateActivity extends AppCompatActivity {
-    private DatabaseController db = MainActivity.getDB();
-    private HashMap<String,MyEquation> equations = db.selectAll();
+    private IDatabase db = MainActivity.getDB();
+    private AbstractMap<String,MyEquation> equations = db.selectAll();
     private LinearLayout ll;
     private String currentEquation;
     private final String BUNDLE_STRING_EQUATION = "currentequation";

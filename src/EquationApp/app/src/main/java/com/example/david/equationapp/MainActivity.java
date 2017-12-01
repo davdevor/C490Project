@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 123;
-    private  static DatabaseController db;
+    private  static IDatabase db;
     private static String searchWord;
     private static String BUNDLE_STRING_SEARCH = "mainSearch";
 
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
      * this method is used by all activites so they can get a reference to the database
      * @return a DatabaseController that all the activities will use
      */
-    public static DatabaseController getDB(){
+    public static IDatabase getDB(){
         return db;
     }
 
