@@ -11,6 +11,7 @@ import com.example.david.equationapp.models.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 
 /**
@@ -19,7 +20,6 @@ import java.util.Iterator;
 
 public class AllActivity extends AppCompatActivity implements View.OnClickListener {
     private IDatabase db = MainActivity.getDB();
-    private Collection<MyEquation> equationList;
     private HashMap<String,MyEquation> equations;
     private LinearLayout ll;
     private ScrollView sv;
@@ -63,12 +63,10 @@ public class AllActivity extends AppCompatActivity implements View.OnClickListen
         ll = new LinearLayout(this);
         sv.addView(ll);
         ll.setOrientation(LinearLayout.VERTICAL);
-        equationList = equations.values();
         Button button;
-        Iterator<MyEquation> it = equationList.iterator();
-        for (int i = 0, j = equationList.size(); i < j; i++) {
+        for (Map.Entry<String,MyEquation> x:equations.entrySet()) {
             button = new Button(this);
-            String name = it.next().getName();
+            String name = x.getValue().getName();
             button.setText(name);
             button.setAllCaps(false);
             button.setOnClickListener(this);
